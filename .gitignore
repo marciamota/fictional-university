@@ -11736,3 +11736,7 @@ app/public/wp-settings.php
 app/public/wp-signup.php
 app/public/wp-trackback.php
 app/public/xmlrpc.php
+node_modules/
+ai1wm-backups/
+all-in-one-wp-migration/
+wp-migrate-db/
