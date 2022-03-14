@@ -81,7 +81,7 @@
     </div>
   </div>
 
-  <div class="hero-slider">
+  <!-- <div class="hero-slider">
     <div data-glide-el="track" class="glide__track">
     <div class="glide__slides">
     <div class="hero-slider__slide" style="background-image: url(<?php echo get_theme_file_uri('/images/bus.jpg'); ?>);">
@@ -115,7 +115,47 @@
       <div class="slider__bullets glide__bullets" data-glide-el="controls[nav]">
       </div>
     </div>
-  </div>
+  </div> -->
+
+  <div class="hero-slider">
+    <div data-glide-el="track" class="glide__track">
+        <div class="glide__slides">
+            <?php
+            $homepageSlides = new WP_Query(array(
+                "posts_per_page" => -1,
+                "post_type" => "slide",
+                "orderby" => "title",
+                "order" => "ASC"
+            ));
+            while ($homepageSlides->have_posts()) {
+                $homepageSlides->the_post();
+                 ?>
+                <div class="hero-slider__slide" style="background-image: url(<?php echo get_field("background_image"); ?>);">
+                    <div class="hero-slider__interior container">
+                        <div class="hero-slider__overlay">
+                            <h2 class="headline headline--medium t-center"><?php echo get_field("title"); ?></h2>
+                            <p class="t-center"><?php echo get_field("text"); ?></p>
+                            <?php
+                            if (get_field("link") and get_field("button_text")) { ?>
+                                <p class="t-center no-margin">
+                                    <a href="<?php echo get_field("link"); ?>" class="btn btn--blue">
+                                        <?php echo get_field("button_text") ?>
+                                    </a>
+                                </p>
+                            <?php } ?>
+                            <!-- <?php pageBanner(); ?> -->
+                        </div>
+                    </div>
+                </div>
+            <?php }
+            wp_reset_postdata();
+            ?>
+        </div>
+        <div class="slider__bullets glide__bullets" data-glide-el="controls[nav]"></div>
+    </div>
+</div>
+
+  
 
   <?php get_footer();
 
